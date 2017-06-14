@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 public class mqttTest {
     @Before
     public void before() throws IOException, InterruptedException {
-        System.out.println("before");
         executeCommand("/bin/bash deploy.sh");
     }
 
@@ -22,6 +21,7 @@ public class mqttTest {
         Process p;
         try {
             p = new ProcessBuilder(command.split(" "))
+                    .inheritIO()
                     .start();
             p.waitFor();
         } catch (Exception e) {
