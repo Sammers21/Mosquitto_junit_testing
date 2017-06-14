@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
-public class mqttTest {
+public class MqttTest {
     @Before
     public void before() throws IOException, InterruptedException {
         executeCommand("/bin/bash deploy.sh");
