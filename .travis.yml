@@ -5,10 +5,13 @@ services:
   - docker
 
 jdk:
-    - oraclejdk8
+  - oraclejdk8
 
 notifications:
   email: false
 
+before_install:
+  - docker pull ansi/mosquitto
+
 script:
-    mvn test
+  - mvn test
