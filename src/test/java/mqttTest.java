@@ -1,20 +1,37 @@
-import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertTrue;
 
 public class mqttTest {
     @Before
-    public void before() {
+    public void before() throws IOException, InterruptedException {
+        System.out.println("before");
+        executeCommand("/bin/bash deploy.sh");
+    }
 
+    private void executeCommand(String command) {
+        Process p;
+        try {
+            p = new ProcessBuilder(command.split(" "))
+                    .start();
+            p.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @After
-    public void after() {
-
+    public void after() throws IOException, InterruptedException {
+        executeCommand("/bin/bash undeploy.sh");
     }
 
     @Test
@@ -39,13 +56,14 @@ public class mqttTest {
             System.out.println("Message published");
             sampleClient.disconnect();
             System.out.println("Disconnected");
-            System.exit(0);
+            assertTrue(true);
         } catch (MqttException me) {
             System.out.println("reason " + me.getReasonCode());
             System.out.println("msg " + me.getMessage());
             System.out.println("loc " + me.getLocalizedMessage());
             System.out.println("cause " + me.getCause());
             System.out.println("excep " + me);
+            assertTrue(false);
         }
     }
 }
