@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class MqttTest {
     @Before
     public void before() throws IOException, InterruptedException {
-        executeCommand("/bin/bash deploy.sh");
+        executeCommand("/bin/bash src/test/resources/deploy.sh");
     }
 
     private void executeCommand(String command) {
@@ -31,7 +31,7 @@ public class MqttTest {
 
     @After
     public void after() throws IOException, InterruptedException {
-        executeCommand("/bin/bash undeploy.sh");
+        executeCommand("/bin/bash src/test/resources/undeploy.sh");
     }
 
     @Test
