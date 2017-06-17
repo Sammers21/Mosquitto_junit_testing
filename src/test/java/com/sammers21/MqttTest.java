@@ -1,3 +1,5 @@
+package com.sammers21;
+
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -12,28 +14,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertTrue;
 
 public class MqttTest {
-    @Before
-    public void before() throws IOException, InterruptedException {
-        executeCommand("/bin/bash src/test/resources/deploy.sh");
-    }
-
-    private void executeCommand(String command) {
-        Process p;
-        try {
-            p = new ProcessBuilder(command.split(" "))
-                    .inheritIO()
-                    .start();
-            p.waitFor();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @After
-    public void after() throws IOException, InterruptedException {
-        executeCommand("/bin/bash src/test/resources/undeploy.sh");
-    }
-
     @Test
     public void test() {
         String topic = "MQTT Examples";
