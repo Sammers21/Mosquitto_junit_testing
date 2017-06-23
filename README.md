@@ -3,5 +3,5 @@ Travis: [![Build Status](https://travis-ci.org/Sammers21/Mosquitto_junit_testing
 # How to run tests?
 
 ```
-mvn clean test
+mvn clean install
 ```
